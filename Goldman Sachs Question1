@@ -1,0 +1,45 @@
+class Solution{
+  public:
+   bool checkAna(string s1, string s2){
+       vector<int>one(256,0);
+       vector<int>two(256,0);
+       for(char ch:s1){
+           one[ch]++;
+       }
+       for(char ch:s2){
+           two[ch]++;
+       }
+       for(int i=0;i<256;i++){
+           if(one[i]!=two[i]){
+               return false;
+           }
+       }
+       return true;
+   }
+    vector<vector<string> > Anagrams(vector<string>& sl) {
+        vector<pair<string,bool>> slb;
+        for(string s:sl){
+            slb.push_back({s,false});
+        }
+        vector<vector<string>>ans;
+        for(int i=0;i<slb.size();i++){
+            if(!slb[i].second){
+                vector<string>current;
+                current.push_back(slb[i].first);
+                slb[i].second = true;
+                for(int j=i+1;j<slb.size();j++){
+                    if(!slb[j].second){
+                        bool isAna = checkAna(slb[i].first,slb[j].first);
+                        if(isAna){
+                           slb[j].second  = true;
+                           current.push_back(slb[j].first);
+                        }
+                    }
+                }
+            
+                ans.push_back(current);
+            }
+        }
+        return ans;
+    }
+};
