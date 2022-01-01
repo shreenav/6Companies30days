@@ -1,0 +1,17 @@
+string encode(string src)
+{     
+  string ans = "";
+  for(int i=0;i<src.length();){
+      int j=i+1;
+      int count = 1;
+      while(src[j]==src[i]){
+          count++;
+          j++;
+      }
+      ans = ans+src[i];
+      ans = ans + to_string(count);
+      i = j;
+  }
+  return ans;
+}     
+ 
