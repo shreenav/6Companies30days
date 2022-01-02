@@ -1,0 +1,21 @@
+int CountWays(string str){
+		    // Code here
+		    int l = str.length();
+		    int dp[l+1];
+		    dp[0] = 1; //dp[i+1] stores count upto index i of str 
+		    dp[1] = 1;
+		    if(l==1 and str[0]!='0')
+		        return 1;
+            if(str[0]=='0')
+                return 0;
+            for(int i=2;i<=l;i++){
+                dp[i] = 0;
+                if(str[i-1]>'0')
+                    dp[i] = dp[i-1];
+                
+                if(str[i-2]=='1' or str[i-2]=='2' and str[i-1]<'7'){
+                    dp[i] = (dp[i] + dp[i-2])%1000000007;
+                }
+            }
+            return dp[l];
+		}
