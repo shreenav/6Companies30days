@@ -22,3 +22,28 @@ string printMinNumberForPattern(string S){
         }
         return ans;
     }
+
+
+
+//without stack 
+string printMinNumberForPattern(string S){
+        // code here
+        string ans = "1";
+        int start = 2;
+        for(int i=0;i<S.length();i++){
+            ans = ans + char(start + '0');
+            start++;
+        }
+        int i=0, j=1;
+        for(int k=0;k<S.length();k++){
+            if(S[k] == 'I'){
+                reverse(ans.begin() + i, ans.begin() + j);
+                i = j;
+            }
+            j++;
+        }
+        if(S[S.length()-1] == 'D'){
+            reverse(ans.begin() + i, ans.begin() + j);
+        }
+        return ans;
+    }
