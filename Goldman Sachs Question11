@@ -1,0 +1,20 @@
+int *findTwoElement(int *arr, int n) {
+        int a,b;
+        long long sum=0,sqsum=0;
+        
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            sum-=(i+1);
+            
+            sqsum+=(long long)arr[i]*(long long)arr[i];
+            sqsum-=(long long)(i+1)*(long long)(i+1);
+            
+        }
+        
+        int aplusb= (int)(sqsum/sum);
+        a=(sum+aplusb)/2;
+        b=a-sum;
+        int *ans;
+        ans[0]=a,ans[1]=b;
+        return ans;
+    }
