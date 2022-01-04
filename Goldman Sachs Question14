@@ -1,0 +1,19 @@
+//sliding window
+int minSubArrayLen(int target, vector<int>& nums) {
+        int i = 0, j = 0;
+        int ans = nums.size() + 1;
+        int sAs = 0;
+        while(i<nums.size()){
+            while(sAs<target and j<nums.size()){
+                sAs+=nums[j++];
+            }
+            if(sAs>=target)
+            ans = min(ans, j-i);
+            sAs-= nums[i];
+            i++; 
+        }
+        if(ans==nums.size() + 1){
+            return 0;
+        }
+        return ans;
+    }
