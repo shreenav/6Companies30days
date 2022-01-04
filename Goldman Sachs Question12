@@ -1,0 +1,6 @@
+long long squaresInChessBoard(long long N) {
+        // code here
+        //for square of size n*n the number of square is: 
+        // 1^2 + 2^2 + ..... + n^2
+        return (N*(N+1)*(2*N+1))/6;
+    }
