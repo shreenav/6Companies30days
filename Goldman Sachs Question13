@@ -1,0 +1,24 @@
+string decodedUtil(string &s, int &i){
+        string result;
+        while(i<s.length() and s[i]!=']'){
+        if(isdigit(s[i])){
+            int k = 0;
+            while(i<s.length() and isdigit(s[i])){
+                k = k*10 + s[i++] - '0';
+            }
+            i++;
+            string r = decodedUtil(s,i);
+            while(k--){
+                result = result + r;
+            }
+            i++;
+        }
+        else
+            result = result + s[i++];
+        }
+        return result;
+    }
+    string decodedString(string s){
+        int i = 0;
+        return decodedUtil(s,i);
+    }
