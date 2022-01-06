@@ -1,0 +1,25 @@
+int longestMountain(vector<int>& arr) {
+        int answer = 0;
+        for(int i=1; i<arr.size()-1;){
+            //if current element can be a possible peak of the mountain
+            if(arr[i]>arr[i-1] and arr[i]>arr[i+1]){
+                int current = 1;
+                int j = i;
+                //find the length of the current mountain
+                while(j>=1 and arr[j]>arr[j-1]){
+                    current++;
+                    j--;
+                }
+                while(i<arr.size()-1 and arr[i]>arr[i+1]){
+                    current++;
+                    i++;
+                }
+              answer = max(answer,current);  
+            }
+            //otherwise move to next element 
+            else{
+                i++;
+            }
+        }
+        return answer;
+    }
