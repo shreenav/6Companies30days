@@ -1,0 +1,21 @@
+string FirstNonRepeating(string A){
+		    queue<int>q;
+		    int freq[26] = {0};
+		    for(int i=0;i<A.length();i++){
+		        char ch = A[i];
+		        freq[ch-'a']++;
+		        if(freq[ch-'a']==1){
+		            q.push(ch);
+		        }
+		        while(!q.empty() and freq[q.front() - 'a']!=1){
+		            q.pop();
+		        }
+		        if(q.empty()){
+		            A[i] = '#';
+		        }
+		        else{
+		            A[i] = q.front();
+		        }
+		    }
+		    return A;
+		}
