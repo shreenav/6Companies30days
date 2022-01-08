@@ -1,0 +1,23 @@
+void matchPairs(char nuts[], char bolts[], int n) {
+	    int pattern[9] = {'0','0','0','0','0','0','0','0','0'};
+	    for(int i=0;i<n;i++){
+	        switch(nuts[i]){
+	            case('!'): pattern[0] = '!'; break;
+	            case('#'): pattern[1] = '#'; break;
+	            case('$'): pattern[2] = '$'; break;
+	            case('%'): pattern[3] = '%'; break;
+	            case('&'): pattern[4] = '&'; break;
+	            case('*'): pattern[5] = '*'; break;
+	            case('@'): pattern[6] = '@'; break;
+	            case('^'): pattern[7] = '^'; break;
+	            default: pattern[8] = '~';
+	        }
+	    }
+	    int i = 0;
+	    for(int j=0;j<9;j++){
+	        if(pattern[j]!='0'){
+	            nuts[i] = pattern[j];
+	            bolts[i++] = pattern[j];
+	        }
+	    }
+	}
