@@ -1,0 +1,35 @@
+int isValid(vector<vector<int>> mat){
+        for(int i=0;i<9;i++){
+            int freq1[10] = {0};
+            int freq2[10] = {0};
+            for(int j=0;j<9;j++){
+                freq1[mat[i][j]]++;
+                freq2[mat[j][i]]++;
+            }
+            for(int j=1;j<=9;j++){
+                if(freq1[j]>1){
+                    return false;
+                }
+                if(freq2[j]>1){
+                    return false;
+                }
+            }
+        }
+        
+        for(int i=0;i<9;i+=3){
+            for(int j=0;j<9;j+=3){
+                int freq[10] = {0};
+                for(int cx = i; cx<i+3; cx++){
+                    for(int cy = j; cy<j+3; cy++){
+                       freq[mat[cx][cy]]++; 
+                    }
+                }
+                for(int j=1;j<=9;j++){
+                    if(freq[j]>1){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
