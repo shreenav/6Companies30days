@@ -1,0 +1,55 @@
+int bfs(Node*targetNode,unordered_map<Node*, Node*>&mp){
+        int ans = 0;
+        queue<Node*>q;
+        q.push(targetNode);
+        unordered_map<Node*, int>visited;
+        visited[targetNode] = 1;
+        while(!q.empty()){
+            int k=q.size();
+            while(k--){
+                Node*f = q.front();
+                q.pop();
+                if(f->left and !visited[f->left]){
+                    q.push(f->left);
+                    visited[f->left] = 1;
+                }
+                if(f->right and !visited[f->right]){
+                    q.push(f->right);
+                    visited[f->right] = 1;
+                }
+                if(mp[f] and !visited[mp[f]]){
+                    q.push(mp[f]);
+                    visited[mp[f]] = 1;
+                }
+            }
+            if(!q.empty())
+             ans++;
+        }
+        return ans;
+    }
+    Node* mapToParent(Node*root, int target,unordered_map<Node*, Node*>&mp){
+        queue<Node*>q;
+        q.push(root);
+        Node*tN;
+        while(!q.empty()){
+            Node*f = q.front();
+            q.pop();
+            if(f->data == target)
+            tN = f;
+            if(f->left){
+                mp[f->left] = f;
+                q.push(f->left);
+            }
+            if(f->right){
+                mp[f->right] = f;
+                q.push(f->right);
+            }
+        }
+        return tN;
+    }
+    int minTime(Node* root, int target) 
+    {
+        unordered_map<Node*, Node*>mp;
+        Node *targetNode = mapToParent(root, target, mp);
+        return bfs(targetNode,mp);
+    }
