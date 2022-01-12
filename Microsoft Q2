@@ -1,0 +1,32 @@
+bool containsAcycle(int node, vector<int>adj[], vector<bool>&visited, vector<bool>&recst){
+        visited[node] = true;
+        recst[node] = true;
+        for(auto nbr:adj[node]){
+           if(!visited[nbr] and containsAcycle(nbr, adj, visited, recst)){
+               return true;
+           } 
+           else{
+               if(recst[nbr]){
+                   return true;
+               }
+           }
+        }
+        recst[node] = false;
+        return false;
+    }
+	bool isPossible(int N, vector<pair<int, int> >& prerequisites) {
+	    vector<int>adj[N];
+	    for(auto p:prerequisites){
+	        adj[p.first].push_back(p.second);
+	    }
+	    vector<bool>visited(N, false);
+	    vector<bool>recst(N,false);
+	    for(int i=0;i<N;i++){
+	        if(visited[i]!=true){
+	        if(containsAcycle(i, adj, visited, recst)){
+	            return false;
+	        }
+	        }
+	    }
+	    return true;
+	}
