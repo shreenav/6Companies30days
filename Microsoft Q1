@@ -1,12 +1,27 @@
-int maxProfit(int K, int N, int A[]) {
-        int dp[K+1][N];
-        memset(dp,0,sizeof(dp));
-        for(int i=1; i<=K; i++){
-            int mx = INT_MIN;
-            for(int j=1;j<N;j++){
-                mx = max(mx, dp[i-1][j-1] - A[j-1]);
-                dp[i][j] = max(dp[i][j-1], mx + A[j]);
-            }
-        }
-        return dp[K][N-1];
-    }
+int minDiffernce(int arr[], int n) 
+	{ 
+	    int sum;
+	    for(int i=0;i<n;i++) sum +=arr[i];
+	    bool dp[n+1][sum+1];
+	    dp[0][0]=true;
+	    for(int i=1;i<=sum;i++) dp[0][i]=false;
+	    for(int i=1;i<=n;i++) dp[i][0]=true;
+	    
+	    for(int i=1;i<=n;i++){
+	        for(int j=1;j<=sum;j++)
+	        {
+	            if(arr[i-1]<=j)
+	            dp[i][j]=dp[i-1][j] || dp[i-1][j-arr[i-1]];
+	            else
+	            dp[i][j]=dp[i-1][j];
+	        }
+	    }
+	    
+	   vector<int>v;
+	   int mn=INT_MAX;
+	   for(int i=0;i<=sum/2;i++)
+	   {
+	       if(dp[n][i]) mn=min(mn,sum-2*i);
+	   }
+	   return mn;
+	} 
