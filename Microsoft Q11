@@ -1,0 +1,16 @@
+vector<string> generate(int N)
+{
+	if(N==1){
+	    return {"1"};
+	}
+	vector<string>res(N);
+	res[0] = "1";
+	for(int i=1;i<N;i++){
+	    int n = i+1;
+	    if(n%2==0)
+	        res[i] = res[n/2 - 1] + "0";
+	    else
+	        res[i] = res[n/2 - 1] + "1";
+	}
+	return res;
+}
