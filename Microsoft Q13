@@ -1,0 +1,22 @@
+int isBridge(int V, vector<int> adj[], int c, int d) 
+    {
+        vector<bool>vis(V+1,false);
+        queue<int> q;
+        q.push(c);
+        vis[c] = true;
+        while(!q.empty()){
+            int it = q.front();
+            q.pop();
+            for(int v: adj[it]){
+                if((it==c and v==d) or (it==d and v ==c))
+                continue;
+                if(!vis[v]){
+                    q.push(v);
+                    vis[v] = true;
+                }
+            }
+        }
+        if(vis[d])
+            return 0;
+        return 1;
+    }
