@@ -1,0 +1,24 @@
+void connect(Node *root)
+    {
+       queue<Node *>q;
+       q.push(root);
+       while(!q.empty()){
+           int k = q.size();
+           while(k--){
+               Node * f = q.front();
+               q.pop();
+               f->nextRight = NULL;
+               if(k){
+                   Node *s = q.front();
+                   f->nextRight = s;
+                   s->nextRight = NULL;
+               }
+               if(f->left){
+                   q.push(f->left);
+               }
+               if(f->right){
+                   q.push(f->right);
+               }
+           }
+       }
+    }   
