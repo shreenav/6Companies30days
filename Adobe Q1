@@ -1,0 +1,17 @@
+vector<int> subarraySum(int arr[], int n, long long s)
+    {
+        int i=0, j = 0;
+        long long csum = 0;
+        while(j<n){
+           csum+= arr[j];
+           while(csum>s and i<j){
+               csum-=arr[i];
+               i++;
+           }
+           if(csum==s){
+               return {i+1, j+1};
+           }
+           j++;
+        }
+        return {-1};
+    }
