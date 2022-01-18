@@ -1,0 +1,24 @@
+int atoi(string s) {
+        int res = 0;
+        int l = s.length();
+        bool negative = false;
+        if(l==1 and s[0] == '-')
+        return 0;
+        if(l==1 and !isdigit(s[0]))
+        return -1;
+        int i=0;
+        if(s[i]=='-'){
+            negative = true;
+            i++;
+        }
+        while(i<l){
+            if(!isdigit(s[i]))
+            return -1;
+            int d = s[i] - '0';
+            res = res*10 + d;
+            i++;
+        }
+        if(negative)
+        return -1*res;
+        return res;
+    }
