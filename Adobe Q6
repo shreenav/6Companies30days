@@ -1,0 +1,18 @@
+void util(vector<string>&result, string comb, int open, int close, int i, int n){
+        if(i==2*n){
+            result.push_back(comb);
+        }
+            if(open<n){
+                util(result, comb+'(', open+1, close, i+1, n);
+            }
+            if(close<open){
+                util(result, comb+')', open, close+1, i+1, n);
+            }
+    }
+    vector<string> AllParenthesis(int n) 
+    {
+        string comb = "";
+        vector<string>result;
+        util(result, comb, 0, 0, 0,n);
+        return result;
+    }
