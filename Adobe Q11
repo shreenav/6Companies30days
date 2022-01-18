@@ -1,0 +1,20 @@
+string amendSentence (string s)
+    {
+        string result = "";
+        if(s[0]>='A' and s[0]<='Z'){
+            result+= (char)(s[0] + 32);
+        }
+        else{
+            result += s[0];
+        }
+        for(int i=1;i<s.length(); i++){
+            if(s[i]>='A' and s[i]<='Z'){
+                result+=' ';
+                result+= (char)(s[i] + 32);
+            }
+            else{
+                result+=s[i];
+            }
+        }
+        return result;
+    }
