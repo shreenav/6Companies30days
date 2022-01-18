@@ -1,0 +1,16 @@
+vector<string> winner(string arr[],int n)
+    {
+        map<string, int>mp;
+        for(int i=0;i<n;i++){
+            mp[arr[i]]++;
+        }
+        string ans; 
+        int maxFreq = 0;
+        for(auto p:mp){
+            if(p.second>maxFreq){
+                ans = p.first;
+                maxFreq = p.second;
+            }
+        }
+        return {ans,to_string(maxFreq)};
+    }
