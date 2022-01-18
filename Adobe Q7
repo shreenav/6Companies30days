@@ -1,0 +1,19 @@
+int util(vector<int>&A,vector<vector<int>>&dp, int start, int end){
+        if(start>end){
+            return dp[start][end] = 0;
+        }
+        if(start==end){
+            return dp[start][end] = A[start];
+        }
+        if(dp[start][end]!=-1){
+            return dp[start][end];
+        }
+        int left = A[start] + min(util(A,dp,start+2,end), util(A,dp,start+1, end-1));
+        int right = A[end] + min(util(A,dp,start+1,end-1), util(A,dp,start, end-2));
+        return dp[start][end] = max(left, right);
+    }
+    int maxCoins(vector<int>&A,int n)
+    {
+	    vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+	    return util(A, dp, 0, A.size()-1);
+    }
