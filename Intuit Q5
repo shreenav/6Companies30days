@@ -1,0 +1,29 @@
+ bool check(vector<int>&nums, int m, int cur){
+        int sets = 1;
+        int setsum = 0;
+        for(int i=0; i<nums.size(); i++){
+            setsum+=nums[i];
+            if(setsum>cur){
+                sets++;
+                setsum = nums[i];
+            }
+            if(sets>m)
+                return false;
+        }
+        return true;
+    }
+    int splitArray(vector<int>& nums, int m) {
+        int sum = 0, mxAns = 0;
+        for(int i=0;i<nums.size();i++){
+            sum+=nums[i];
+            mxAns = max(mxAns, nums[i]);
+        }
+        while(mxAns<sum){
+            int mid = mxAns + (sum-mxAns)/2;
+            if(check(nums, m, mid))
+                sum = mid;
+            else
+                mxAns = mid+1;
+        }
+        return mxAns;
+    }
