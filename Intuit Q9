@@ -1,0 +1,32 @@
+void dfs(int r, int c, vector<vector<bool>>&vis, int prevH, vector<vector<int>>& heights){
+        int row = heights.size(), col = heights[0].size();
+        if(r<0 or c<0 or r>=row or c>=col or heights[r][c]<prevH or vis[r][c]==true)
+            return;
+        vis[r][c] = true;
+        dfs(r+1, c, vis, heights[r][c], heights);
+        dfs(r-1, c, vis, heights[r][c], heights);
+        dfs(r, c+1, vis, heights[r][c], heights);
+        dfs(r, c-1, vis, heights[r][c], heights);
+    }
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        int r = heights.size();
+        int c = heights[0].size();
+        vector<vector<bool>> pac(r, vector<bool>(c,false));
+        vector<vector<bool>> atl(r, vector<bool>(c,false));
+        for(int j = 0; j<c; j++){
+            dfs(0, j, pac, heights[0][j], heights);
+            dfs(r-1, j, atl, heights[r-1][j], heights);
+        }
+        for(int i=0; i<r; i++){
+            dfs(i, 0, pac, heights[i][0], heights);
+            dfs(i, c-1, atl, heights[i][c-1], heights);
+        }
+        vector<vector<int>>res;
+        for(int i=0; i<r; i++){
+            for(int j = 0; j<c; j++){
+                if(pac[i][j] and atl[i][j])
+                    res.push_back({i,j});
+            }
+        }
+        return res;
+    }
