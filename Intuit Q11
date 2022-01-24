@@ -1,0 +1,31 @@
+Node *util(vector<vector<int>>&grid, int sr, int er, int sc, int ec, int size){
+    Node *ans;
+    int sum = 0;
+    for(int i=sr; i<er; i++){
+        for(int j = sc; j<ec; j++){
+            sum+=grid[i][j];
+        }
+    }
+    if(sum==0){
+        ans = new Node(false, true);
+    }
+    else if(sum == size*size){
+        ans = new Node(true, true);
+    }
+    else{
+        ans = new Node(false, false);
+        size = size/2;
+        ans->topLeft = util(grid, sr, sr+size, sc, sc+size, size);
+        ans->topRight = util(grid, sr, sr+size, sc+size, ec, size);
+        ans->bottomLeft = util(grid, sr+size, er, sc, sc+size, size);
+        ans->bottomRight = util(grid, sr+size, er, sc+size, ec, size);
+    }
+    return ans;
+}
+class Solution {
+public:
+    Node* construct(vector<vector<int>>& grid) {
+        int n = grid.size();
+        return util(grid, 0, n, 0, n, n);
+    }
+};
