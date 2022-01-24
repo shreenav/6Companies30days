@@ -1,0 +1,32 @@
+bool flag = false;
+    void dfs(int node,vector<int>     adj[],vector<bool>&vis,vector<bool>&dfsvis,vector<int>&ans){
+        vis[node] = true;
+        dfsvis[node] = true;
+        for(int i:adj[node]){
+            if(!vis[i]){
+                dfs(i, adj, vis, dfsvis, ans);
+            }
+            else if(dfsvis[i]){
+                    flag = true;
+                    return;
+                }
+            }
+        ans.push_back(node);
+        dfsvis[node] = false;
+    }
+    vector<int> findOrder(int n, vector<vector<int>>& prerequisites) {
+        vector<int> adj[n];
+        vector<int>ans;
+        for(int i=0; i<prerequisites.size(); i++){
+            adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
+        }
+        vector<bool>vis(n, false);
+        vector<bool>dfsvis(n, false);
+        for(int i=0; i<n; i++){
+            if(!vis[i])
+                dfs(i, adj, vis, dfsvis, ans);
+        }
+        if(flag)
+            return {};
+        return ans;
+    }
