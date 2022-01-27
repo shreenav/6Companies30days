@@ -25,3 +25,16 @@ struct compare{
         }
         return pq.top();
     }
+
+//using sort
+bool compare(string n1, string n2){
+        if(n1.length()!=n2.length()){
+            return n1.length()>n2.length();
+        }
+        return n1>n2;
+    }
+    string kthLargestNumber(vector<string>& nums, int k) {
+        sort(nums.begin(),nums.end(),[this](string a, string b){
+             return (compare(a,b));});
+        return nums[k-1];
+    }
