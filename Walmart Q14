@@ -1,0 +1,24 @@
+void util(string str, string &ans, int k, int idx){
+        if(k==0)
+        return ;
+        char mxCh = str[idx];
+        for(int i=idx+1; i<str.length(); i++){
+            mxCh = max(mxCh, str[i]);
+        }
+        if(mxCh!=str[idx])k--;
+        for(int j=str.length()-1; j>=idx; j--){
+            if(str[j] == mxCh){
+                swap(str[idx], str[j]);
+                if(str.compare(ans)>0)
+                ans = str;
+                util(str, ans, k, idx+1);
+                swap(str[idx], str[j]);
+            }
+        }
+    }
+    string findMaximumNum(string str, int k)
+    {
+       string ans = str;
+       util(str, ans, k, 0);
+       return ans;
+    }
