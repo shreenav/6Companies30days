@@ -1,0 +1,20 @@
+int util(Node **n){
+        Node *node = *n;
+        if(node==NULL){
+            return 0;
+        }
+        if(node->left==NULL and node->right==NULL){
+            int x = node->data;
+            node->data = 0;
+            return x;
+        }
+        int x = node->data;
+        int lsum = util(&node->left);
+        int rsum = util(&node->right);
+        node->data = lsum + rsum;
+        return x + node->data;
+    }
+    void toSumTree(Node *node)
+    {
+        util(&node);
+    }
