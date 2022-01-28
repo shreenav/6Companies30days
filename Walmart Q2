@@ -1,0 +1,28 @@
+int util(vector<int>&piles, int start, int end,vector<vector<int>>&dp){
+        int n = piles.size();
+        if(start<0 or end<0 or start>=n or end>=n)
+        {
+            return 0;
+        }
+        if(end<start){
+            return dp[start][end] = 0;
+        }
+        if(dp[start][end]!=-1){
+            return dp[start][end];
+        }
+        int left = piles[start] + min(util(piles,start+1,end-1,dp), util(piles, start+2, end,dp));
+        int right = piles[end] + min(util(piles,start+1,end-1,dp), util(piles, start, end-2,dp));
+        return dp[start][end] = max(left, right);
+    }
+    bool stoneGame(vector<int>& piles) {
+       int n = piles.size();
+       vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        int ts = 0;
+       int maxforalice = util(piles,0,n-1,dp); 
+       for(int i=0; i<n; i++){
+           ts+=piles[i];
+       }
+       if(maxforalice>(ts-maxforalice))
+           return true;
+        return false;
+    }
